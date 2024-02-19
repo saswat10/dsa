@@ -1,3 +1,6 @@
+from typing import overload
+
+
 class TreeNode:
   def __init__(self, data):
     self.data = data
@@ -25,6 +28,17 @@ class TreeNode:
       for child in self.children:
         child.print_tree()
 
+  def print_tree_level(self, level):
+    if self.get_level() > level:
+      return
+    spaces = ' ' * self.get_level() * 3
+    prefix = spaces + "|__" if self.parent else ""
+    print(prefix + self.data)
+    if self.children:
+      for child in self.children:
+        child.print_tree_level(level)
+
+
 def build_product_tree():
   root = TreeNode('Electronics')
 
@@ -51,5 +65,5 @@ def build_product_tree():
 
 if __name__ == '__main__':
   root = build_product_tree()
-  root.print_tree()
+  root.print_tree_level(1)
   pass
