@@ -1,6 +1,3 @@
-from typing import overload
-
-
 class TreeNode:
   def __init__(self, data):
     self.data = data
