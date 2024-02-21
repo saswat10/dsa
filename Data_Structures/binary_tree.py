@@ -36,23 +36,53 @@ class BinarySearchTree:
             elements += self.right.in_order_traversal()
 
         return elements
-    
+
     def search(self, val):
         if self.data == val:
             return True
-        
+
         if val < self.data:
             if self.left:
                 return self.left.search(val)
             else:
                 return False
-            
+
         if val > self.data:
-          if self.right:
-              return self.right.search(val)
-          else:
-              return False
-          
+            if self.right:
+                return self.right.search(val)
+            else:
+                return False
+
+    def find_max(self):
+        if self.right is None:
+            return self.data
+        return self.right.find_max()
+
+    def find_min(self):
+        if self.left is None:
+            return self.left
+        return self.left.find_min()
+
+    def delete(self, val):
+        if val < self.data:
+            if self.left:
+                self.left = self.left.delete(val)
+        elif val > self.data:
+            if self.right:
+                self.right = self.right.delete(val)
+        else:
+            if self.left is None and self.right is None:
+                return None
+            if self.left is None:
+                return self.right
+            if self.right is None:
+                return self.right
+
+            min_val = self.right.find_min()
+            self.data = min.val
+            self.right = self.right.delete(min_val)
+
+        return self
 
 
 def build_tree(elements):
